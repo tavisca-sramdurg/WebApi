@@ -1,20 +1,7 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 
-FROM microsoft/dotnet:2.2-sdk AS build
-WORKDIR /src
-COPY ["BasicApi/BasicApi.csproj", "BasicApi/"]
-RUN dotnet restore "BasicApi/BasicApi.csproj"
-COPY . .
-WORKDIR "/src/BasicApi"
-RUN dotnet build "BasicApi.csproj" -c Release -o /app
+WORKDIR app 
 
-FROM build AS publish
-RUN dotnet publish "BasicApi.csproj" -c Release -o /app
+COPY BasicApi/out .
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "BasicApi.dll"]
