@@ -46,7 +46,7 @@ pipeline {
         stage('Upload'){
             steps{
                 echo 'Login into docker'
-                bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                bat 'docker login -u sramdurg -p charpach45$%'
                 
             }
         }
