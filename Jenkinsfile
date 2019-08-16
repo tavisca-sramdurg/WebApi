@@ -10,7 +10,7 @@ pipeline {
         string(defaultValue: "BasicApi.sln", description: 'Solution file name', name: 'solutionName')
         string(defaultValue: "TestWebApi/TestWebApi.csproj", description: 'Test file name', name: 'testName')
         string(name: 'USERNAME', defaultValue: 'sramdurg')
-        string(name: 'PASSWORD', defaultValue: 'charpach45$%')
+        string(name: 'PASSWORD', defaultValue: 'charpach45')
     }
     
     stages { 
@@ -43,10 +43,10 @@ pipeline {
              }
         }
 
-        stage('Upload'){
+        stage('Login'){
             steps{
                 echo 'Login into docker'
-                bat 'docker login -u sramdurg -p charpach45$%'
+                bat 'docker login -u sramdurg -p charpach45'
                 
             }
         }
