@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-    registry = "sramdurg/repo45"
+    registry = "sramdurg/repo456"
     registryCredential = 'dockerhub'
   }
     
@@ -59,7 +59,7 @@ pipeline {
         stage('Push the image'){
             steps{
                 echo 'push the image'
-                bat 'docker push sramdurg/repo45:latest'
+                bat 'docker push sramdurg/repo456:latest'
             }
         }
         stage('Remove image'){
@@ -73,7 +73,7 @@ pipeline {
             steps
             {
                 echo 'pull the image'
-                bat 'docker pull sramdurg/repo45:api_image'
+                bat 'docker pull sramdurg/repo456:api_image'
             }
         }
         stage('run docker image'){
