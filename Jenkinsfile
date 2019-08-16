@@ -53,7 +53,7 @@ pipeline {
         stage('Tag docker image'){
             steps {
                 echo 'tag docker'
-                bat 'docker tag api_image:latest sramdurg/repo45:latest'
+                bat 'docker tag api_image:latest sramdurg/repo456:latest'
             }
         }
         stage('Push the image'){
