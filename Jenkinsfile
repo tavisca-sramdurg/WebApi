@@ -79,7 +79,7 @@ pipeline {
         stage('run docker image'){
             steps{
                 echo 'run the image'
-                bat 'docker run -p 6960:55031 latest'
+                bat 'docker run -p 6960:55031 repo456'
             }
         }
     }
