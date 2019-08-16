@@ -34,7 +34,7 @@ pipeline {
             steps{
                 echo 'Docker step'
                 sh 'docker build -t api_image -f Dockerfile .'
-                sh 'docker run api_image -p 8087:55031'
+                sh 'docker run api_image -p 6069:55031'
                 
             }
         }
