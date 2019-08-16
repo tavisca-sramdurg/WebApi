@@ -11,21 +11,21 @@ pipeline {
             
             steps{
                 echo 'Build step'
-                sh 'dotnet build %solutionName% -p:Configuration=release -v:q'
+                bat 'dotnet build %solutionName% -p:Configuration=release -v:q'
             }
         }
         stage('Test') {
             
             steps{
                 echo 'Test step'
-                sh 'dotnet test %testName%'
+                bat 'dotnet test %testName%'
             }
         }
         stage('Publish') {
             
             steps{
                 echo 'Publish step'
-                sh 'dotnet publish %solutionName% -c RELEASE -o Publish'
+                bat 'dotnet publish %solutionName% -c RELEASE -o Publish'
             }
         }
         
@@ -33,8 +33,8 @@ pipeline {
             
             steps{
                 echo 'Docker step'
-                sh 'docker build -t api_image -f Dockerfile .'
-                sh 'docker run api_image -p 6069:55031'
+                bat 'docker build -t api_image -f Dockerfile .'
+                bat 'docker run api_image -p 6069:55031'
                 
             }
         }
