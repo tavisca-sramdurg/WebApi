@@ -52,14 +52,20 @@ pipeline {
                 bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
                 
             }
+        }
+        stage('Tag docker image'){
             steps {
                 echo 'tag docker'
                 bat 'docker tag ${DOCKER_FILE}:latest sramdurg/repo45:latest'
             }
+        }
+        stage('Push the image'){
             steps{
                 echo 'push the image'
                 bat 'docker push sramdurg/repo45:latest'
             }
+        }
+        stage('Remove image'){
             steps{
                 echo 'untag the image'
                 bat 'docker rmi ${DOCKER_FILE}'
