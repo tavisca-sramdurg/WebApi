@@ -4,7 +4,6 @@ pipeline {
     parameters {
         string(defaultValue: "BasicApi.sln", description: 'Solution file name', name: 'solutionName')
         string(defaultValue: "TestWebApi/TestWebApi.csproj", description: 'Test file name', name: 'testName')
-        string(defaultValue: "BasicApi/bin/Release/netcoreapp2.2/BasicApi.dll", description: 'Path of the dll file', name: 'dllPath')
     }
     
     stages { 
@@ -12,21 +11,21 @@ pipeline {
             
             steps{
                 echo 'Build step'
-                bat 'dotnet build %solutionName% -p:Configuration=release -v:q'
+                sh 'dotnet build %solutionName% -p:Configuration=release -v:q'
             }
         }
         stage('Test') {
             
             steps{
                 echo 'Test step'
-                bat 'dotnet test %testName%'
+                sh 'dotnet test %testName%'
             }
         }
         stage('Publish') {
             
             steps{
                 echo 'Publish step'
-                bat 'dotnet publish %solutionName% -c RELEASE -o Publish'
+                sh 'dotnet publish %solutionName% -c RELEASE -o Publish'
             }
         }
         
@@ -34,8 +33,8 @@ pipeline {
             
             steps{
                 echo 'Docker step'
-                bat 'docker build -t api_image -f Dockerfile .'
-                bat 'docker run api_image -p 8087:55031'
+                sh 'docker build -t api_image -f Dockerfile .'
+                sh 'docker run api_image -p 8087:55031'
                 
             }
         }

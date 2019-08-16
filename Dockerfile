@@ -4,4 +4,4 @@ WORKDIR app
 
 COPY BasicApi/out .
 
-ENTRYPOINT ["dotnet", "BasicApi.dll"]
+ENTRYPOINT ["dotnet", "BasicApi.dll", "--urls=http://*:55031"]

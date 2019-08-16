@@ -19,7 +19,7 @@ namespace BasicApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseUrls(urls: "http://*:55031");
+                .UseStartup<Startup>()/*.UseUrls(urls: "http://*:55031")*/;
     }
 }
 //docker build --tag hellotag .
