@@ -34,7 +34,7 @@ pipeline {
             steps{
                 echo 'Docker step'
                 bat 'docker build -t api_image -f Dockerfile .'
-                bat 'docker run api_image -p 6069:55031'
+                bat 'docker run -p 6069:55031 api_image'
                 
             }
         }
