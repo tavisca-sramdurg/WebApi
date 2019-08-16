@@ -73,7 +73,7 @@ pipeline {
             steps
             {
                 echo 'pull the image'
-                bat 'docker pull sramdurg/repo456:api_image'
+                bat 'docker pull sramdurg/repo456:latest'
             }
         }
         stage('run docker image'){
