@@ -46,12 +46,14 @@ pipeline {
         }
 
         stage('SonarQube Analysis'){
+            steps{
                 script {
                   scannerHome = tool 'SonarQube Scanner 2.8'
                 }
                 withSonarQubeEnv('SonarQube Scanner') {
                   bat "%scannerHome%/bin/sonar-scanner"
                 }
+            }     
         }
 
         stage('Login'){
