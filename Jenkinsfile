@@ -49,7 +49,7 @@ pipeline {
                 steps{
                     def scannerHome = tool 'SonarScanner 4.0.0';
                     withSonarQubeEnv('webSonarApi') {
-                        bat "${scannerHome}/bin/sonar-scanner"
+                        bat '%scannerHome%/bin/sonar-scanner'
                     }
                 }
         }
