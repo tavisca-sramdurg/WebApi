@@ -11,8 +11,8 @@ pipeline {
         string(defaultValue: "TestWebApi/TestWebApi.csproj", description: 'Test file name', name: 'testName')
         string(name: 'username', defaultValue: 'sramdurg')
         string(name: 'password', defaultValue: 'charpach45')
-        string(defaultValue: "api_image", description: 'Name of the image on your local machine', name: 'localImageName')
-        string(defaultValue: "repo456", description: 'Name of the repo on dockerhub', name: 'remoteImageName')
+        string(defaultValue: 'api_image', description: 'Name of the image on your local machine', name: 'localImageName')
+        string(defaultValue: 'repo456', description: 'Name of the repo on dockerhub', name: 'remoteImageName')
     }
     
     stages { 
