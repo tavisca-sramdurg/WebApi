@@ -48,7 +48,7 @@ pipeline {
         stage('SonarQube Analysis'){
             steps{
                 script {
-                  scannerHome = tool 'SonarQube Scanner 2.8'
+                  scannerHome = tool 'WebApiSonarScanner'
                 }
                 withSonarQubeEnv('SonarQube Scanner') {
                   bat "%scannerHome%/bin/sonar-scanner"
