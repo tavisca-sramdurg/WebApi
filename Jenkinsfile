@@ -38,11 +38,18 @@ pipeline {
             }
         }
         
-        stage('Docker build and run') {
+        stage('Docker build') {
             
              steps{
                 bat 'docker build -t %localImageName% -f Dockerfile .'
              }
+        }
+
+        stage('SonarQube Analysis'){
+                def scannerHome = tool 'SonarScanner 4.0.0';
+                withSonarQubeEnv('webSonarApi') {
+                    bat "${scannerHome}/bin/sonar-scanner"
+                }
         }
 
         stage('Login'){
