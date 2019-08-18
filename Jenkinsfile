@@ -46,9 +46,11 @@ pipeline {
         }
 
         stage('SonarQube Analysis'){
-                def scannerHome = tool 'SonarScanner 4.0.0';
-                withSonarQubeEnv('webSonarApi') {
-                    bat "${scannerHome}/bin/sonar-scanner"
+                steps{
+                    def scannerHome = tool 'SonarScanner 4.0.0';
+                    withSonarQubeEnv('webSonarApi') {
+                        bat "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
         }
 
