@@ -11,6 +11,8 @@ pipeline {
         string(defaultValue: "TestWebApi/TestWebApi.csproj", description: 'Test file name', name: 'testName')
         string(name: 'username', defaultValue: 'sramdurg')
         string(name: 'password', defaultValue: 'charpach45')
+        string(defaultValue: "api_image", description: 'Name of the image on your local machine', name: 'localImageName')
+        string(defaultValue: "repo456", description: 'Name of the repo on dockerhub', name: 'remoteImageName')
     }
     
     stages { 
@@ -39,7 +41,7 @@ pipeline {
         stage('Docker build and run') {
             
              steps{
-                bat 'docker build -t api_image -f Dockerfile .'
+                bat 'docker build -t %localImageName% -f Dockerfile .'
              }
         }
 
@@ -53,19 +55,19 @@ pipeline {
         stage('Tag docker image'){
             steps {
                 echo 'tag docker'
-                bat 'docker tag api_image:latest sramdurg/repo456:latest'
+                bat 'docker tag %localImageName%:latest %username%/%remoteImageName%:latest'
             }
         }
         stage('Push the image'){
             steps{
                 echo 'push the image'
-                bat 'docker push sramdurg/repo456:latest'
+                bat 'docker push %username%/%remoteImageName%:latest'
             }
         }
         stage('Remove image'){
             steps{
-                echo 'untag the image'
-                bat 'docker rmi api_image'
+                echo 'Remove the local image'
+                bat 'docker rmi %localImageName%'
             }
         }
 
@@ -73,13 +75,13 @@ pipeline {
             steps
             {
                 echo 'pull the image'
-                bat 'docker pull sramdurg/repo456:latest'
+                bat 'docker pull %username%/%remoteImageName%:latest'
             }
         }
         stage('run docker image'){
             steps{
                 echo 'run the image'
-                bat 'docker run -p 6960:55031 sramdurg/repo456'
+                bat 'docker run -p 6960:55031 %username%/%remoteImageName%'
             }
         }
     }
