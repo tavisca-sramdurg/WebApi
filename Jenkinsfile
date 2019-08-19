@@ -45,7 +45,7 @@ pipeline {
              }
         }
 
-        stage('SonarQube Analysis'){
+        /*stage('SonarQube Analysis'){
             steps{
                 script {
                   scannerHome = tool 'WebApiSonarScanner'
@@ -54,25 +54,19 @@ pipeline {
                   bat "%scannerHome%/bin/sonar-scanner"
                 }
             }     
-        }
+        }*/
 
-        stage('Login'){
-            steps{
-                echo 'Login into docker'
-                bat 'docker login -u %username% -p %password%'
-                
-            }
-        }
-        stage('Tag docker image'){
-            steps {
-                echo 'tag docker'
-                bat 'docker tag %localImageName%:latest %username%/%remoteImageName%:latest'
-            }
-        }
         stage('Push the image'){
             steps{
-                echo 'push the image'
-                bat 'docker push %username%/%remoteImageName%:latest'
+                script{
+                    docker.withRegistry('','dockerHubCredentials')
+
+                    echo 'tag docker'
+                    bat 'docker tag %localImageName%:latest %username%/%remoteImageName%:latest'
+
+                    echo 'push the image'
+                    bat 'docker push %username%/%remoteImageName%:latest'
+                }
             }
         }
         stage('Remove image'){
